@@ -1,0 +1,143 @@
+# =============================================================================
+# Clinical Trial Benchmarking — .gitignore
+# =============================================================================
+
+# --- Data artifacts ----------------------------------------------------------
+# Never commit these. They regenerate from notebook 01 and total ~600 MB
+# across the pipeline (source parquet + shared bundle + audit outputs).
+#
+# If you want to ship a small fixture for tests, put it in tests/fixtures/
+# and whitelist it explicitly (see the negation rules at the bottom).
+*.parquet
+*.parquet.partial
+*.parquet.tmp
+*.metadata.json
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+
+# Pipeline output directories
+cluster_data/
+audit_output/
+data/raw/
+data/interim/
+data/processed/
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual environments ----------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.conda/
+.python-version
+
+# --- Packaging / build -------------------------------------------------------
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# --- Jupyter -----------------------------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+
+# Notebook backups produced by some editors
+*.ipynb~
+*.ipynb.orig
+*.ipynb.bak
+
+# --- Model / experiment tracking ---------------------------------------------
+mlruns/
+wandb/
+lightning_logs/
+outputs/
+runs/
+
+# --- OS / editor -------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+!.vscode/settings.json.example
+!.vscode/extensions.json.example
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# --- Secrets -----------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials.json
+token.json
+
+# --- Logs --------------------------------------------------------------------
+*.log
+logs/
+
+# --- Explicitly re-included --------------------------------------------------
+# Small fixtures needed by unit tests are allowed, even though they match
+# the *.parquet pattern above. Keep this section last so negation wins.
+!tests/fixtures/*.parquet
+!tests/fixtures/*.json
+!tests/fixtures/*.csv
+
+# Keep the empty placeholder directories tracked so the repo has structure
+!data/.gitkeep
+!docs/images/.gitkeep
