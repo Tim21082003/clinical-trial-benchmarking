@@ -1,0 +1,86 @@
+# =============================================================================
+# Clinical Trial Benchmarking — .gitattributes
+# =============================================================================
+
+# --- Default behavior --------------------------------------------------------
+# Normalize line endings in the repo to LF, on every OS. Working-tree
+# endings remain native (CRLF on Windows checkouts, LF elsewhere).
+* text=auto eol=lf
+
+# --- Explicit text files -----------------------------------------------------
+*.py      text diff=python
+*.pyi     text diff=python
+*.md      text diff=markdown
+*.txt     text
+*.rst     text
+*.toml    text
+*.yaml    text
+*.yml     text
+*.json    text
+*.cff     text
+*.cfg     text
+*.ini     text
+*.gitignore  text
+*.gitattributes  text
+
+# --- Binary files (never diff, never normalize) ------------------------------
+*.parquet  binary
+*.feather  binary
+*.h5       binary
+*.hdf5     binary
+*.pkl      binary
+*.pickle   binary
+*.joblib   binary
+*.npy      binary
+*.npz      binary
+*.pt       binary
+*.pth      binary
+*.onnx     binary
+*.zip      binary
+*.tar      binary
+*.gz       binary
+*.bz2      binary
+*.7z       binary
+*.pdf      binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.svg      text
+*.ico      binary
+
+# --- Notebooks ---------------------------------------------------------------
+# Use the Jupyter notebook diff driver. Install it once per machine with:
+#
+#     nbstripout --install
+#
+# or, if you prefer the pure-git approach without nbstripout:
+#
+#     git config --global diff.jupyternotebook.command \
+#       'jupyter nbconvert --to script --stdout'
+#
+# The driver renders notebook diffs cell-by-cell instead of line-by-line,
+# which makes review of a 30-cell change tractable.
+*.ipynb  diff=jupyternotebook
+*.ipynb  merge=jupyternotebook
+*.ipynb  filter=nbstripout
+*.ipynb  -text
+
+# --- Lockfiles ---------------------------------------------------------------
+# A lockfile merge is almost always better resolved by regenerating it than
+# by hand. Mark it binary so git gives up and lets you re-run the resolver.
+requirements.lock  binary
+poetry.lock        binary
+uv.lock            binary
+
+# --- Vendored / generated ----------------------------------------------------
+# Mark generated files so they don't pollute `git diff --stat`.
+src/clinical_trial_benchmarking/_version.py  linguist-generated=true
+docs/_build/**                               linguist-generated=true
+dist/**                                      linguist-generated=true
+
+# --- GitHub linguist ---------------------------------------------------------
+# Keep the language bar honest: this is a Python project, not a Jupyter one.
+*.ipynb    linguist-documentation
+docs/**    linguist-documentation
+tests/**   linguist-detectable=true
