@@ -1,0 +1,34 @@
+# Clinical Trial Benchmarking — peer-group audit pipeline
+# Python >= 3.10
+#
+# Pinned versions reflect the environment used to produce the published
+# numbers (attribution R² = 0.4134 train / 0.3819 test). Loosen at your own
+# risk — SHAP and XGBoost in particular have had minor behavior changes
+# between point releases.
+
+# --- Core data stack ---------------------------------------------------------
+numpy==1.26.4
+pandas==2.2.2
+pyarrow==16.1.0
+
+# --- Modeling / attribution --------------------------------------------------
+scikit-learn==1.5.0
+xgboost==2.0.3
+shap==0.45.0
+scipy==1.13.1
+
+# --- Visualization -----------------------------------------------------------
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# --- API / I/O ---------------------------------------------------------------
+requests==2.32.3
+
+# --- Dev / notebook tooling --------------------------------------------------
+# Not required to run the pipeline; required to reproduce the analysis in
+# notebooks. Comment out if you only need the library.
+jupyterlab==4.2.2
+nbconvert==7.16.4
+nbstripout==0.7.1
+pytest==8.2.2
+statsmodels==0.14.2   # only used by compute_vif() in features.py
